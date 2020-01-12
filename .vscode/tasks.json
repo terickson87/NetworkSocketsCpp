@@ -1,0 +1,40 @@
+{
+   // See https://go.microsoft.com/fwlink/?LinkId=733558
+   // for the documentation about the tasks.json format
+   "version": "2.0.0",
+   "tasks": [
+      {
+         "label": "g++ build active file",
+         "type": "shell",
+         "command": "g++",
+         "args": [
+            "-pedantic-errors",// Treat as errors the warnings demmanded by strict ISO C and ISO C++
+            "-Wall",// All Compiler warnings
+            "-Weffc++",// Effective C++ warnings
+            "-Wextra",// Extra Compiler warnings
+            "-Wsign-conversion",// Warn for implicit conversions that may change the sign of an integer value
+            "-Werror",// Treat warnings as errors
+            "-std=c++14",// C++14 enabled
+            "-o",
+            "${fileDirname}/${fileBasenameNoExtension}",
+            "${file}"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         }
+      },
+      {
+         "label": "make active file",
+         "type": "shell",
+         "command": "make",
+         "args": [
+            "${fileDirname}/${fileBasenameNoExtension}"
+         ],
+         "group": {
+            "kind": "build",
+            "isDefault": true
+         }
+      }
+   ]
+}
