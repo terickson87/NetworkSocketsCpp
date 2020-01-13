@@ -2,7 +2,7 @@
 
 #include "RunInNewWsl.h"
 #include <cstdlib>
-#include <iostream>
+// #include <iostream>
 
 RunInNewWsl::RunInNewWsl() {
 }
@@ -26,7 +26,7 @@ int RunInNewWsl::buildWslCommand() {
    m_wslCommand += "; ";
    m_wslCommand += m_command;
    m_wslCommand += m_commandSuffix;
-   std::cout << "wslCommand String: \"" << m_wslCommand << "\"" << std::endl;
+   // std::cout << "wslCommand String: \"" << m_wslCommand << "\"" << std::endl;
    return 0;
 }
 
