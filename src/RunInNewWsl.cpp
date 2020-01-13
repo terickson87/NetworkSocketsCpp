@@ -1,6 +1,6 @@
 
 
-#include "src/RunInNewWsl.h"
+#include "RunInNewWsl.h"
 #include <cstdlib>
 
 RunInNewWsl::RunInNewWsl() {
@@ -23,9 +23,10 @@ int RunInNewWsl::buildWslCommand() {
    m_wslCommand = m_commandPredicate;
    m_wslCommand += m_command;
    m_wslCommand += m_commandSuffix;
+   return 0;
 }
 
 int RunInNewWsl::executeWslCommand() {
    this->buildWslCommand();
-   system(m_wslCommand.c_str());
+   return system(m_wslCommand.c_str());
 }

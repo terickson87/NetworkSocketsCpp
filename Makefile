@@ -51,17 +51,24 @@ CPPFLAGS := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -s
 # $(BUILDDIR)/Date.o: $(SRCDIR)/Date.cpp $(SRCDIR)/Date.h
 #  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
-# $(BUILDDIR)/testDate.o: $(SRCDIR)/testDate.cpp $(SRCDIR)/Date.o $(SRCDIR)/Date.h
+# $(BUILDDIR)/testDate.o: $(SRCDIR)/testDate.cpp $(BUILDDIR)/Date.o $(SRCDIR)/Date.h
 #  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
-# $(BINDIR)/testDate: $(SRCDIR)/testDate.o $(SRCDIR)/Date.o
+# $(BINDIR)/testDate: $(BUILDDIR)/testDate.o $(BUILDDIR)/Date.o
 #  	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
 
 $(BUILDDIR)/RunInNewWsl.o: $(SRCDIR)/RunInNewWsl.cpp $(SRCDIR)/RunInNewWsl.h
- 	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
-$(BUILDDIR)/testRunInNewWsl.o: $(SRCDIR)/testRunInNewWsl.cpp $(SRCDIR)/RunInNewWsl.o
-  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+$(BUILDDIR)/testRunInNewWsl.o: $(SRCDIR)/testRunInNewWsl.cpp $(BUILDDIR)/RunInNewWsl.o
+	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
-$(BINDIR)/testRunInNewWsl: $(SRCDIR)/testRunInNewWsl.o $(SRCDIR)/RunInNewWsl.o
-  	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
+$(BINDIR)/testRunInNewWsl: $(BUILDDIR)/testRunInNewWsl.o $(BUILDDIR)/RunInNewWsl.o
+	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
+
+.PHONY: testRunInNewWsl
+testRunInNewWsl: $(BINDIR)/testRunInNewWsl
+	echo Building testRunInNewWsl
+
+$(BUILDDIR)/GenericSocket.o: $(SRCDIR)/GenericSocket.cpp $(SRCDIR)/GenericSocket.h
+	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
