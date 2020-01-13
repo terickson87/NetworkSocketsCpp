@@ -8,7 +8,7 @@ private:
    const std::string m_commandSuffix{"'"};
    std::string m_directory{"~"};
    std::string m_command{"pwd; ls; echo Hello World!"};
-   std::string m_wslCommand{nullptr};
+   std::string m_wslCommand{""};
    
    int buildWslCommand();
    // cmd.exe /c start cmd.exe /k 'wsl -- cd ~/Documents/NetworkSocketsCpp; pwd; ls; echo Hello World!'
