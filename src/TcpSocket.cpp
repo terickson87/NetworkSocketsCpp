@@ -16,6 +16,10 @@ int TcpSocket::acceptConnection() {
 
 }
 
-int TcpSocket::receiveMessage() {
+int TcpSocket::sendMessage() {
    
+}
+
+int TcpSocket::receiveMessage() {
+
 }

@@ -8,6 +8,10 @@ UdpSocket::UdpSocket() : GenericSocket(SOCK_DGRAM) {
 UdpSocket::~UdpSocket() {
 }
 
-int UdpSocket::receiveMessage() {
+int UdpSocket::sendMessage() {
    
+}
+
+int UdpSocket::receiveMessage() {
+
 }

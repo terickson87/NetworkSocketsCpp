@@ -32,7 +32,7 @@ private:
 
    pAddressInfo_t mp_Hints;
    pAddressInfo_t mp_AddressInfo;
-   int socketFD;
+   int m_SocketFileDescriptor;
 
   union {
      struct in_addr;
@@ -47,6 +47,7 @@ private:
 
    // Helper Functions
    int initializeHints();
+   int bypassBindNameInUseError();
 
 public:
    // Constructor
@@ -68,8 +69,10 @@ public:
    std::string message() {return m_Message;}
    
    // Actuators
-   int sendMessage();
    int buildSocket();
+   int bindServer();
+   int closeSocket();
+   virtual int sendMessage() = 0;
    virtual int receiveMessage() = 0;
 
    // Static Methods

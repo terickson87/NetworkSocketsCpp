@@ -21,7 +21,9 @@ GenericSocket::GenericSocket(int socketFamily, int socketType) : GenericSocket(s
 
 // Destructor
 GenericSocket::~GenericSocket() {
+   freeaddrinfo(mp_Hints);
    delete mp_Hints;
+   freeaddrinfo(mp_AddressInfo);
    delete mp_AddressInfo;
 }
 
@@ -44,13 +46,13 @@ int GenericSocket::setMessage(std::string message) {
 // Getters
 
 // Actuators
-int GenericSocket::sendMessage() {
+int GenericSocket::buildSocket() {
 
    return 0;
 }
 
-int GenericSocket::buildSocket() {
-
+int GenericSocket::closeSocket() {
+   close(m_SocketFileDescriptor);
    return 0;
 }
 

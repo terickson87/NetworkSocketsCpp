@@ -2,7 +2,7 @@
 
 #include "GenericSocket.h"
 
-class TcpSocket : public GenericSocket {
+class TcpSocket : virtual public GenericSocket {
 private:
    
 public:
@@ -11,5 +11,7 @@ public:
 
    int connect();
    int acceptConnection();
+
+   int sendMessage();
    int receiveMessage();
 };
