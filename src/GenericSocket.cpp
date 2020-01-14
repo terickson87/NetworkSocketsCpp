@@ -11,12 +11,12 @@ GenericSocket::GenericSocket() {
    mp_AddressInfo = new struct addrinfo;
 }
 
-GenericSocket::GenericSocket(int socketFamily) : m_SocketFamily{socketFamily} {
-   GenericSocket();
+GenericSocket::GenericSocket(int socketFamily) : GenericSocket() {
+   setScoketFamily(socketFamily);
 }
 
-GenericSocket::GenericSocket(int socketFamily, int socketType) : m_GoodScoketType{socketType} {
-   GenericSocket(socketFamily);
+GenericSocket::GenericSocket(int socketFamily, int socketType) : GenericSocket(socketFamily) {
+   setScoketType(socketType);
 }
 
 // Destructor

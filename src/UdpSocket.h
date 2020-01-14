@@ -4,8 +4,10 @@
 
 class UdpSocket :public GenericSocket {
 private:
-   /* data */
+   
 public:
-   UdpSocket(/* args */);
+   UdpSocket();
    ~UdpSocket();
+
+   int receiveMessage();
 };

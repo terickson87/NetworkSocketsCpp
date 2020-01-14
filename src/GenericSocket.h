@@ -45,6 +45,9 @@ private:
    bool isGoodSocketFamily(int socketFamily);
    bool isGoodSocketType(int socketType);
 
+   // Helper Functions
+   int initializeHints();
+
 public:
    // Constructor
    GenericSocket();
@@ -67,6 +70,7 @@ public:
    // Actuators
    int sendMessage();
    int buildSocket();
+   virtual int receiveMessage() = 0;
 
    // Static Methods
    static int localPortNumber(int socketFileDescriptor);

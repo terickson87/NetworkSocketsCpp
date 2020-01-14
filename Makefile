@@ -72,3 +72,9 @@ testRunInNewWsl: $(BINDIR)/testRunInNewWsl
 
 $(BUILDDIR)/GenericSocket.o: $(SRCDIR)/GenericSocket.cpp $(SRCDIR)/GenericSocket.h
 	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+
+$(BUILDDIR)/TcpSocket.o: $(SRCDIR)/TcpSocket.cpp $(SRCDIR)/TcpSocket.h
+	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+
+$(BUILDDIR)/UdpSocket.o: $(SRCDIR)/UdpSocket.cpp $(SRCDIR)/UdpSocket.h
+	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
