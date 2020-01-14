@@ -9,12 +9,3 @@ public:
    TcpSocket(/* args */);
    ~TcpSocket();
 };
-
-TcpSocket::TcpSocket(/* args */) {
-   setScoketFamily(SOCK_STREAM);
-}
-
-TcpSocket::~TcpSocket() {
-}
-
-
