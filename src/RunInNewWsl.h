@@ -1,8 +1,11 @@
 
+#ifndef RUN_IN_NEW_WSL_H
+#define RUN_IN_NEW_WSL_H
+
+// Standard Libraries
 #include <string>
 
-class RunInNewWsl
-{
+class RunInNewWsl {
 private:
    const std::string m_commandPredicate{"cmd.exe /c start cmd.exe /k 'wsl -- cd "};
    const std::string m_commandSuffix{"'"};
@@ -25,3 +28,5 @@ public:
 
    int executeWslCommand();
 };
+
+#endif
