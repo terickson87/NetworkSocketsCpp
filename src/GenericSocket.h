@@ -20,8 +20,10 @@
 #include <iostream>
 #include <string>
 
-typedef struct addrinfo* pAddressInfo_t;
-typedef struct sockaddr* pSocketAddress_t;
+typedef struct addrinfo addressInfo_t;
+typedef addressInfo_t* pAddressInfo_t;
+typedef struct sockaddr socketAddress_t;
+typedef socketAddress_t* pSocketAddress_t;
 
 class GenericSocket {
 private:
@@ -30,15 +32,18 @@ private:
    int m_SocketType = AF_UNSPEC; // Either AF_INET (IPv4), AF_INET6 (IPv6), or AF_UNSPEC (Undefined)
    const int m_GoodScoketType[3] = {AF_INET, AF_INET6, AF_UNSPEC};
 
-   pAddressInfo_t mp_Hints;
-   pAddressInfo_t mp_AddressInfo;
+   addressInfo_t mp_Hints;
+   pAddressInfo_t mp_AddressInfo = nullptr;
+   pAddressInfo_t mp_i_AddressInfo = nullptr;
    int m_SocketFileDescriptor;
 
-  union {
-     struct in_addr;
-     struct in6_addr;
-  } m_IpAddress; // Either a struct in_addr (IPv4) or struct in6_addr (IPv6)
-   
+   union {
+      struct in_addr;
+      struct in6_addr;
+   } m_IpAddress; // Either a struct in_addr (IPv4) or struct in6_addr (IPv6)
+   std::string m_IpAddressAsAString = "127.0.0.1";
+   int m_PortNumber;
+
    std::string m_Message;
 
    // Value check methods
@@ -47,13 +52,19 @@ private:
 
    // Helper Functions
    int initializeHints();
+   int getAddressInfo();
    int bypassBindNameInUseError();
+   int bindSocket();
 
 public:
    // Constructor
    GenericSocket();
    GenericSocket(int socketFamily);
    GenericSocket(int socketFamily, int socketType);
+
+   // constants
+   int m_RETURN_FAILURE = -1;
+   int m_RETURN_SUCCESS = 0;
 
    // Destructor
    ~GenericSocket();
@@ -67,10 +78,13 @@ public:
    int scoketType() {return m_SocketType;}
    int scoketFamily() {return m_SocketFamily;}
    std::string message() {return m_Message;}
-   
+   std::string portNumberAsAString(){return std::to_string(m_PortNumber);}
+
    // Actuators
-   int buildSocket();
-   int bindServer();
+   int buildClientSocket();
+   int connectSocket();
+   int buildServerSocket();
+   int listen();
    int closeSocket();
    virtual int sendMessage() = 0;
    virtual int receiveMessage() = 0;
