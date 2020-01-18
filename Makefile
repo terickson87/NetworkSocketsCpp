@@ -19,6 +19,7 @@ SRCDIR := src
 BUILDDIR := build
 BINDIR := bin
 
+CXX := g++
 CFLAGS := -Wall
 GDBFLAG := -ggdb
 CPPFLAGS := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -std=c++14
@@ -32,49 +33,49 @@ CPPFLAGS := -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror -s
 
 # EXAMPLE 1:
 # test: test.cpp test.h test2.h
-#	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+#	$(CXX) -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
 # this is effectively the same as:
-# g++ -o test -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror test.cpp
+# $(CXX) -o test -ggdb -Wall -pedantic-errors -Weffc++ -Wextra -Wsign-conversion -Werror test.cpp
 
 # EXAMPLE 2:
 # Ch9/Date.o: Ch9/Date.cpp Ch9/Date.h
-#  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+#  	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
 # Ch9/testDate.o: Ch9/testDate.cpp Ch9/Date.o Ch9/Date.h
-#  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+#  	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
 # Ch9/testDate: Ch9/testDate.o Ch9/Date.o
-#  	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
+#  	$(CXX) -o $@ $(GDBFLAG) $(CPPFLAGS) $^
 
 # EXAMPLE 3:
 # $(BUILDDIR)/Date.o: $(SRCDIR)/Date.cpp $(SRCDIR)/Date.h
-#  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+#  	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
 # $(BUILDDIR)/testDate.o: $(SRCDIR)/testDate.cpp $(BUILDDIR)/Date.o $(SRCDIR)/Date.h
-#  	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+#  	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 #
 # $(BINDIR)/testDate: $(BUILDDIR)/testDate.o $(BUILDDIR)/Date.o
-#  	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
+#  	$(CXX) -o $@ $(GDBFLAG) $(CPPFLAGS) $^
 
 $(BUILDDIR)/RunInNewWsl.o: $(SRCDIR)/RunInNewWsl.cpp $(SRCDIR)/RunInNewWsl.h
-	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
 $(BUILDDIR)/testRunInNewWsl.o: $(SRCDIR)/testRunInNewWsl.cpp $(BUILDDIR)/RunInNewWsl.o
-	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
 $(BINDIR)/testRunInNewWsl: $(BUILDDIR)/testRunInNewWsl.o $(BUILDDIR)/RunInNewWsl.o
-	g++ -o $@ $(GDBFLAG) $(CPPFLAGS) $^
+	$(CXX) -o $@ $(GDBFLAG) $(CPPFLAGS) $^
 
 .PHONY: testRunInNewWsl
 testRunInNewWsl: $(BINDIR)/testRunInNewWsl
 	echo Building testRunInNewWsl
 
 $(BUILDDIR)/GenericSocket.o: $(SRCDIR)/GenericSocket.cpp $(SRCDIR)/GenericSocket.h
-	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
 $(BUILDDIR)/TcpSocket.o: $(SRCDIR)/TcpSocket.cpp $(SRCDIR)/TcpSocket.h
-	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
 
 $(BUILDDIR)/UdpSocket.o: $(SRCDIR)/UdpSocket.cpp $(SRCDIR)/UdpSocket.h
-	g++ -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
+	$(CXX) -c -o $@ $(GDBFLAG) $(CPPFLAGS) $<
